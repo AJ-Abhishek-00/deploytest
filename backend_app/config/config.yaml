@@ -1,0 +1,10 @@
+app:
+  name: Backend App
+  version: 1.0.0
+
+pagination:
+  default_limit: 5
+  max_limit: 50
+
+security:
+  algorithm: HS256
