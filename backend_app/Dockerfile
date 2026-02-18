@@ -25,8 +25,7 @@ RUN chown -R appuser /app
 # Switch to non-root user
 USER appuser
 
-# Expose FastAPI port
-EXPOSE 8000
+EXPOSE 10000
 
-# Start application
-CMD ["python", "-m", "src.main"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "10000"]
+]
