@@ -13,14 +13,15 @@ app = FastAPI()
 def root():
     return {"message": "Backend is running successfully 🚀"}
 
-# ✅ CORS Configuration
+
+# ✅ CORS Configuration (IMPORTANT FIX)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://clabs-ofxrx0wze-abhis-projects-db8c8177.vercel.app"
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,7 +42,6 @@ app.include_router(dashboard_router)
 # ✅ Auto Seed 50 Products On Startup
 @app.on_event("startup")
 def seed_products():
-
     db: Session = SessionLocal()
 
     try:
@@ -60,7 +60,6 @@ def seed_products():
             db.add(product)
 
         db.commit()
-
         print("✅ 50 products seeded successfully")
 
     finally:
