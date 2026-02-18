@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
+from typing import List
+
 
 from src.modules.product.schema import (
     ProductCreate,
@@ -31,6 +33,19 @@ def create(
 ):
 
     return create_product(db, request)
+    
+@router.post("/bulk", response_model=list[ProductResponse])
+def create_bulk(
+    request: List[ProductCreate],
+    db: Session = Depends(get_db)
+):
+    products = []
+
+    for item in request:
+        product = create_product(db, item)
+        products.append(product)
+
+    return products
 
 
 @router.get("", response_model=ProductListResponse)
