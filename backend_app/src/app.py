@@ -51,9 +51,8 @@ def seed_products():
         for i in range(1, 51):
             product = Product(
                 name=f"Sample Product {i}",
-                description=f"Description for product {i}",
-                price=100 + i,
                 category="General",
+                price=100 + i,
                 rating=4.0
             )
             db.add(product)
