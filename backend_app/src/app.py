@@ -4,6 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 # Create FastAPI app
 app = FastAPI()
 
+# ✅ Add ROOT route here
+@app.get("/")
+def root():
+    return {"message": "Backend is running successfully 🚀"}
+
 # ADD CORS HERE
 app.add_middleware(
     CORSMiddleware,
